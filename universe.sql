@@ -121,6 +121,41 @@ ALTER SEQUENCE public.moon_moon_id_seq OWNED BY public.moon.moon_id;
 
 
 --
+-- Name: more_info; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.more_info (
+    more_info_id integer NOT NULL,
+    details text NOT NULL,
+    name character varying(60)
+);
+
+
+ALTER TABLE public.more_info OWNER TO freecodecamp;
+
+--
+-- Name: more_info_more_info_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
+--
+
+CREATE SEQUENCE public.more_info_more_info_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.more_info_more_info_id_seq OWNER TO freecodecamp;
+
+--
+-- Name: more_info_more_info_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
+--
+
+ALTER SEQUENCE public.more_info_more_info_id_seq OWNED BY public.more_info.more_info_id;
+
+
+--
 -- Name: planet; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -131,7 +166,8 @@ CREATE TABLE public.planet (
     age integer,
     is_destroyed boolean,
     description text,
-    star_id integer
+    star_id integer,
+    more_info_id integer
 );
 
 
@@ -213,6 +249,13 @@ ALTER TABLE ONLY public.moon ALTER COLUMN moon_id SET DEFAULT nextval('public.mo
 
 
 --
+-- Name: more_info more_info_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.more_info ALTER COLUMN more_info_id SET DEFAULT nextval('public.more_info_more_info_id_seq'::regclass);
+
+
+--
 -- Name: planet planet_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
@@ -265,21 +308,39 @@ INSERT INTO public.moon VALUES (20, 'Dione', 1.12, 5, false, 'One of Saturns lar
 
 
 --
+-- Data for Name: more_info; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.more_info VALUES (1, 'Mercury is the smallest and closest planet to the Sun.', NULL);
+INSERT INTO public.more_info VALUES (2, 'Venus is the hottest planet in the Solar System.', NULL);
+INSERT INTO public.more_info VALUES (3, 'Earth is the only known planet to support life.', NULL);
+INSERT INTO public.more_info VALUES (4, 'Mars is known as the Red Planet.', NULL);
+INSERT INTO public.more_info VALUES (5, 'Jupiter is the largest planet in the Solar System.', NULL);
+INSERT INTO public.more_info VALUES (6, 'Saturn is known for its rings.', NULL);
+INSERT INTO public.more_info VALUES (7, 'Uranus is an ice giant with a tilted axis.', NULL);
+INSERT INTO public.more_info VALUES (8, 'Neptune is the farthest planet from the Sun.', NULL);
+INSERT INTO public.more_info VALUES (9, 'Pluto was formerly classified as a planet, now considered a dwarf planet.', NULL);
+INSERT INTO public.more_info VALUES (10, 'Ceres is the largest object in the asteroid belt.', NULL);
+INSERT INTO public.more_info VALUES (11, 'Eris is a dwarf planet in the Kuiper Belt.', NULL);
+INSERT INTO public.more_info VALUES (12, 'Makemake is a dwarf planet in the Kuiper Belt.', NULL);
+
+
+--
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.planet VALUES (1, 'Mercury', 4.50, 0, false, 'The smallest and closest planet to the Sun.', 7);
-INSERT INTO public.planet VALUES (2, 'Venus', 4.50, 1, false, 'The hottest planet in the Solar System.', 8);
-INSERT INTO public.planet VALUES (3, 'Earth', 4.50, 1, false, 'The only known planet to support life.', 9);
-INSERT INTO public.planet VALUES (4, 'Mars', 4.50, 1, false, 'The Red Planet.', 10);
-INSERT INTO public.planet VALUES (5, 'Jupiter', 4.60, 11, false, 'The largest planet in the Solar System.', 11);
-INSERT INTO public.planet VALUES (6, 'Saturn', 4.50, 9, false, 'Known for its rings.', 12);
-INSERT INTO public.planet VALUES (7, 'Uranus', 4.50, 4, false, 'An ice giant with a tilted axis.', 7);
-INSERT INTO public.planet VALUES (8, 'Neptune', 4.50, 4, false, 'The farthest planet from the Sun.', 8);
-INSERT INTO public.planet VALUES (9, 'Pluto', 4.60, 0, false, 'Formerly classified as a planet, now considered a dwarf planet.', 9);
-INSERT INTO public.planet VALUES (10, 'Ceres', 4.60, 0, false, 'The largest object in the asteroid belt.', 10);
-INSERT INTO public.planet VALUES (11, 'Eris', 4.50, 1, false, 'A dwarf planet in the Kuiper Belt.', 11);
-INSERT INTO public.planet VALUES (12, 'Makemake', 4.50, 1, false, 'A dwarf planet in the Kuiper Belt.', 12);
+INSERT INTO public.planet VALUES (1, 'Mercury', 4.50, 0, false, 'The smallest and closest planet to the Sun.', 7, 1);
+INSERT INTO public.planet VALUES (2, 'Venus', 4.50, 1, false, 'The hottest planet in the Solar System.', 8, 2);
+INSERT INTO public.planet VALUES (3, 'Earth', 4.50, 1, false, 'The only known planet to support life.', 9, 3);
+INSERT INTO public.planet VALUES (4, 'Mars', 4.50, 1, false, 'The Red Planet.', 10, 4);
+INSERT INTO public.planet VALUES (5, 'Jupiter', 4.60, 11, false, 'The largest planet in the Solar System.', 11, 5);
+INSERT INTO public.planet VALUES (6, 'Saturn', 4.50, 9, false, 'Known for its rings.', 12, 6);
+INSERT INTO public.planet VALUES (7, 'Uranus', 4.50, 4, false, 'An ice giant with a tilted axis.', 7, 7);
+INSERT INTO public.planet VALUES (8, 'Neptune', 4.50, 4, false, 'The farthest planet from the Sun.', 8, 8);
+INSERT INTO public.planet VALUES (9, 'Pluto', 4.60, 0, false, 'Formerly classified as a planet, now considered a dwarf planet.', 9, 9);
+INSERT INTO public.planet VALUES (10, 'Ceres', 4.60, 0, false, 'The largest object in the asteroid belt.', 10, 10);
+INSERT INTO public.planet VALUES (11, 'Eris', 4.50, 1, false, 'A dwarf planet in the Kuiper Belt.', 11, 11);
+INSERT INTO public.planet VALUES (12, 'Makemake', 4.50, 1, false, 'A dwarf planet in the Kuiper Belt.', 12, 12);
 
 
 --
@@ -306,6 +367,13 @@ SELECT pg_catalog.setval('public.galaxy_id_seq', 6, true);
 --
 
 SELECT pg_catalog.setval('public.moon_moon_id_seq', 20, true);
+
+
+--
+-- Name: more_info_more_info_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.more_info_more_info_id_seq', 12, true);
 
 
 --
@@ -355,6 +423,22 @@ ALTER TABLE ONLY public.moon
 
 
 --
+-- Name: more_info more_info_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.more_info
+    ADD CONSTRAINT more_info_name_key UNIQUE (name);
+
+
+--
+-- Name: more_info more_info_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.more_info
+    ADD CONSTRAINT more_info_pkey PRIMARY KEY (more_info_id);
+
+
+--
 -- Name: planet planet_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -392,6 +476,14 @@ ALTER TABLE ONLY public.star
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT fk_galaxy FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
+
+
+--
+-- Name: planet fk_more_info; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT fk_more_info FOREIGN KEY (more_info_id) REFERENCES public.more_info(more_info_id);
 
 
 --
